@@ -1,10 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
 
 :root {
   /* fancy serif font */
-    font-family: 'Merriweather', serif;
+  font-family: "Roboto Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+          "wdth" 100,
+          "GRAD" 0;
   color: rgba(255, 255, 255, 1);
   /* gray-300 */
   background-color: rgba(209, 213, 219, 1);

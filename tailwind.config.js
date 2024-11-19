@@ -6,6 +6,10 @@ export default {
     "./src/**/*.{html,jsx}"
   ],
   theme: {
+    fontFamily: {
+      'sans': ['Helvetica', 'Arial', 'sans-serif'],
+        'serif': ['Roboto Serif', 'serif'],
+    },
     extend: {},
   },
   plugins: [],

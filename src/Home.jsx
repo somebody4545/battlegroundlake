@@ -12,7 +12,7 @@ function MainScene() {
     const { set } = useThree()
     const terrainRef = useRef()
     const lastFrameTime = useRef(Date.now())
-
+    // set size based on page #
     useEffect(() => {
         if (cameras.length > 0) {
             cameras[0].fov = 30
@@ -119,20 +119,56 @@ export default function App() {
                     </>
                 )
             case 1:
-                return <h1>Page 1</h1>
+                return (
+                    <>
+                        <div className={'absolute p-[10%] w-[40%] h-full z-10 text-left text-[1.5vh]'}>
+                            <h1>Origins of the Name <h1 className={"text-[3vh] pt-[20%]"}>Pt. 1</h1> </h1>
+                        </div>
+                        <div
+                            className={'absolute p-[10%] w-[70%] left-[30%] h-full z-10 text-left text-[2.5vh] flex flex-col'}>
+                            <p> <h2 className={'text-[4vh] font-bold font-sans'}>Summary</h2>
+                                The name "Battle Ground" seems pretty odd for a natural park. It's named after the city
+                                next to it, which never truly was a "battle ground." Rather, it was named after a
+                                standoff between Captain William Strong and a group of Klickitat escapees...</p>
+                            <button onClick={incrementCounter}
+                                    className={'m-[1vh] bg-blue-500 hover:bg-blue-700 text-white py-[0.5vh] px-4 rounded-full font-sans text-[2vh] ml-auto transition-colors'}>
+                                Next
+                            </button>
+                        </div>
+                    </>
+                )
             case 2:
-                return <h1>Page 2</h1>
+                return  (
+                    <>
+                        <div className={'absolute p-[10%] w-[40%] h-full z-10 text-left text-[1.5vh]'}>
+                            <span className={'text-[8vh] font-bold font-sans'}>1885</span>
+                            <h1>Origins of the Name <h1 className={"text-[3vh] pt-[20%]"}>Pt. 1</h1></h1>
+                        </div>
+                        <div
+                            className={'absolute p-[10%] w-[70%] left-[30%] h-full z-10 text-left text-[2.5vh] flex flex-col'}>
+                            <p> <h2 className={'text-[4vh] font-bold font-sans'}>The Yakima War</h2>
+                                The Yakima war was the stage for the conflict between Strong and the Klickitat. It began when gold had been found in the region of southern Washington, encouraging miners, who often mistreated Indigenous women. Due to the pressure of the miners, Indigenous people retaliated against them.</p>
+                            <button onClick={incrementCounter}
+                                    className={'m-[1vh] bg-blue-500 hover:bg-blue-700 text-white py-[0.5vh] px-4 rounded-full font-sans text-[2vh] ml-auto transition-colors'}>
+                                Next
+                            </button>
+                        </div>
+                    </>
+                )
             default:
                 return <h1>Page {counter}</h1>
         }
     }
-
+    var size = 80
+    if (counter > 0) {
+        size = 120;
+    }
     return (
         <>
             <div className={"fixed bottom-[1vh] right-[3vh] text-black font-sans text-xl p-5"}>
                 <p>Modelled and developed entirely, with blood sweat and tears, by <a href={"https://ineshd.com"} className={"text-blue-500"}>Inesh Dey</a>.</p>
             </div>
-            <div className={"fixed mb-5 h-[80vh] w-[80vh] bg-gray-800 relative rounded-2xl shadow-2xl overflow-clip"}>
+            <div className={`fixed mb-5 h-[80vh] max-w-[80vw] w-[${size}vh] bg-gray-800 relative rounded-2xl shadow-2xl overflow-clip transition-all`}>
                 <Runner counter={counter} />
             </div>
         </>
