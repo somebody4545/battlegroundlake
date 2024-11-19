@@ -8,7 +8,7 @@ function Loader() {
 }
 
 function MainScene() {
-    const { scene, cameras } = useGLTF('/static/assets/mainpage.glb') // Correctly use `useGLTF` here
+    const { scene, cameras } = useGLTF('public/static/models/mainpage.glb') // Correctly use `useGLTF` here
     const { set } = useThree()
     const terrainRef = useRef()
     const lastFrameTime = useRef(Date.now())
