@@ -166,7 +166,7 @@ export default function App() {
     return (
         <>
             <div className={"fixed bottom-[1vh] right-[3vh] text-black font-sans text-xl p-5"}>
-                <p>Modelled and developed entirely, with blood sweat and tears, by <a href={"https://ineshd.com"} className={"text-blue-500"}>Inesh Dey</a>.</p>
+                <p>Modelled and developed entirely, with blood, sweat, and tears, by <a href={"https://ineshd.com"} className={"text-blue-500"}>Inesh Dey</a>.</p>
             </div>
             <div className={`fixed mb-5 h-[80vh] bg-gray-800 relative rounded-2xl shadow-2xl overflow-clip transition-all`} style={{width: size}}>
                 <Runner counter={counter} />
