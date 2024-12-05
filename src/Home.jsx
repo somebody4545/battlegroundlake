@@ -1,6 +1,7 @@
 import React, {Suspense, useEffect, useRef, useState} from 'react'
 import {Canvas, useFrame, useThree} from '@react-three/fiber'
 import {Html, useGLTF, useProgress} from '@react-three/drei'
+import { Environment } from '@react-three/drei'
 
 function Loader() {
     const {progress} = useProgress()
@@ -8,16 +9,16 @@ function Loader() {
 }
 
 function MainScene() {
-    const {scene, cameras} = useGLTF('/static/models/mainpage.glb') // Correctly use `useGLTF` here
-    const {set} = useThree()
+    const { scene, cameras } = useGLTF('/static/models/mainpage.glb')
+    const { set } = useThree()
     const terrainRef = useRef()
     const lastFrameTime = useRef(Date.now())
-    // set size based on page #
+
     useEffect(() => {
         if (cameras.length > 0) {
             cameras[0].fov = 30
             cameras[0].updateProjectionMatrix()
-            set({camera: cameras[0]})
+            set({ camera: cameras[0] })
         }
     }, [cameras, set])
 
@@ -31,16 +32,19 @@ function MainScene() {
     })
 
     return (
-        <primitive
-            object={scene}
-            ref={node => {
-                if (node) {
-                    terrainRef.current = node.getObjectByName('Terrain')
-                }
-            }}
-            castShadow
-            receiveShadow
-        />
+        <>
+            <primitive
+                object={scene}
+                ref={node => {
+                    if (node) {
+                        terrainRef.current = node.getObjectByName('Terrain')
+                    }
+                }}
+                castShadow
+                receiveShadow
+            />
+            <Environment files="/static/hdri/goegap_road_2k.hdr" />
+        </>
     )
 }
 function Page1() {
@@ -71,6 +75,7 @@ function Page1() {
     })
 
     return (
+        <>
         <primitive
             object={scene}
             ref={node => {
@@ -82,6 +87,9 @@ function Page1() {
             castShadow
             receiveShadow
         />
+            <Environment files="/static/hdri/goegap_road_2k.hdr" />
+        </>
+
     )
 }
 
@@ -107,6 +115,7 @@ function Page2() {
         }
     })
     return (
+        <>
         <primitive
             object={scene}
             ref={node => {
@@ -117,9 +126,58 @@ function Page2() {
             castShadow
             receiveShadow
         />
+            <Environment files="/static/hdri/goegap_road_2k.hdr" />
+        </>
     )
 }
 
+function Page3() {  // eslint-disable-line
+    const { scene, cameras } = useGLTF('/static/models/page3.glb')
+    const { set } = useThree()
+    const terrainRef = useRef()
+    const lastFrameTime = useRef(Date.now())
+    useEffect(() => {
+        if (cameras.length > 0) {
+            cameras[0].fov = 20
+            cameras[0].updateProjectionMatrix()
+            set({ camera: cameras[0] })
+        }
+    }, [cameras, set])
+    return (
+        <>
+        <primitive
+            object={scene}
+            castShadow
+            receiveShadow
+        />
+            <Environment files="/static/hdri/goegap_road_2k.hdr" />
+        </>
+    )
+}
+
+function Page4() {  // eslint-disable-line
+    const {scene, cameras} = useGLTF('/static/models/page4.glb')
+    const {set} = useThree()
+    const terrainRef = useRef()
+    const lastFrameTime = useRef(Date.now())
+    useEffect(() => {
+        if (cameras.length > 0) {
+            cameras[0].fov = 20
+            cameras[0].updateProjectionMatrix()
+            set({camera: cameras[0]})
+        }
+    }, [cameras, set])
+    return (
+        <>
+            <primitive
+                object={scene}
+                castShadow
+                receiveShadow
+            />
+            <Environment files="/static/hdri/goegap_road_2k.hdr"/>
+        </>
+    )
+}
 export default function App() {
     const [counter, setCounter] = useState(0)
 
@@ -178,8 +236,8 @@ export default function App() {
                         >
                             <ambientLight intensity={Math.PI / 2}/>
                             <directionalLight
-                                position={[5, 5, 5]}
-                                intensity={1}
+                                position={[100, 5, 5]}
+                                intensity={5}
                                 castShadow
                                 shadow-mapSize-width={1024}
                                 shadow-mapSize-height={1024}
@@ -322,6 +380,36 @@ export default function App() {
                                 Next
                             </button>
                         </div>
+                        <Canvas
+                            style={{
+                                width: '120vh',
+                                height: '80vh',
+                                margin: "auto",
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                zIndex: 20,
+                                pointerEvents: "none"
+                            }}
+                            shadows
+                        >
+                            <ambientLight intensity={Math.PI / 2}/>
+                            <directionalLight
+                                position={[5, 5, 5]}
+                                intensity={1}
+                                castShadow
+                                shadow-mapSize-width={1024}
+                                shadow-mapSize-height={1024}
+                                shadow-camera-far={50}
+                                shadow-camera-left={-10}
+                                shadow-camera-right={10}
+                                shadow-camera-top={10}
+                                shadow-camera-bottom={-10}
+                            />
+                            <Suspense fallback={<Loader/>}>
+                                <Page3/>
+                            </Suspense>
+                        </Canvas>
                     </>
                 )
             case 4:
@@ -346,6 +434,36 @@ export default function App() {
                                 Next
                             </button>
                         </div>
+                        <Canvas
+                            style={{
+                                width: '120vh',
+                                height: '80vh',
+                                margin: "auto",
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                zIndex: 0,
+                                pointerEvents: "none"
+                            }}
+                            shadows
+                        >
+                            <ambientLight intensity={Math.PI / 2}/>
+                            <directionalLight
+                                position={[5, 5, 5]}
+                                intensity={1}
+                                castShadow
+                                shadow-mapSize-width={1024}
+                                shadow-mapSize-height={1024}
+                                shadow-camera-far={50}
+                                shadow-camera-left={-10}
+                                shadow-camera-right={10}
+                                shadow-camera-top={10}
+                                shadow-camera-bottom={-10}
+                            />
+                            <Suspense fallback={<Loader/>}>
+                                <Page4/>
+                            </Suspense>
+                        </Canvas>
                     </>
                 )
             case 5:
