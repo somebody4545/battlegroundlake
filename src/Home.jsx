@@ -591,10 +591,10 @@ export default function App() {
                         <div
                             className={'absolute p-[10%] w-[70%] left-[30%] h-full z-10 text-left text-[2.5vh] flex flex-col'}>
                             <h2 className={'text-[4vh] font-bold font-sans'}>A Resort by the Volcano</h2>
-                            <p className={""}>
+                            <p className={"h-[37%] overflow-y-scroll"}>
                                 The lake was originally a privately owned resort in the 1900s, starting as a small
                                 swimming area in 1916 (Genis, 2021) owned by Henry Blystone. The resort was a popular spot for
-                                swimming and fishing at the time (Genis, 2021)
+                                swimming and fishing at the time (Genis, 2021). Most known information about it comes from advertisements and personal anecdotes, making collecting accurate information about its history difficult.
                             </p>
                             <button onClick={incrementCounter}
                                     className={'m-[1vh] bg-blue-500 hover:bg-blue-700 text-white py-[0.5vh] px-4 rounded-full font-sans text-[2vh] ml-auto transition-colors'}>
