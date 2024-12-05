@@ -89,6 +89,7 @@ function Page2() {
     const { scene, cameras } = useGLTF('/static/models/page2.glb')
     const { set } = useThree()
     const pin = useRef()
+    const lastFrameTime = useRef(Date.now())
     useEffect(() => {
         if (cameras.length > 0) {
             cameras[0].fov = 40
@@ -99,7 +100,10 @@ function Page2() {
     // make location pin spin
     useFrame(() => {
         if (pin.current) {
-            pin.current.rotation.z += 0.01
+            const now = Date.now()
+            const deltaTime = (now - lastFrameTime.current) / 1000
+            lastFrameTime.current = now
+            pin.current.rotation.z += 0.01 * 60 * deltaTime
         }
     })
     return (
